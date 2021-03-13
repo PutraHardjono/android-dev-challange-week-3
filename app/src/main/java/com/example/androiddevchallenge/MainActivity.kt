@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         setContent {
-            val isDarkTheme by remember { mutableStateOf(false) }
+            val isDarkTheme by remember { mutableStateOf(true) }
 
             MyTheme(isDarkTheme) {
                 Login(isDarkTheme = isDarkTheme)
