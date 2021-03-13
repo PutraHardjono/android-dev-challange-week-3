@@ -23,13 +23,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 private val Pink100 = Color(0xFFFFF1F1)
-private val Pink900 = Color (0xFF3F2C2C)
-private val White850 = Color (0xD9FFFFFF)
+private val Pink900 = Color(0xFF3F2C2C)
+private val White850 = Color(0xD9FFFFFF)
 private val Gray = Color(0xFF232323)
 
-private val Green900 = Color (0xFF2D3B2D)
-private val Green300 = Color (0xFFB8C9B8)
-private val White150 = Color (0x26FFFFFF)
+private val Green900 = Color(0xFF2D3B2D)
+private val Green300 = Color(0xFFB8C9B8)
+private val White150 = Color(0x26FFFFFF)
 
 private val DarkColorPalette = darkColors(
     primary = Green900,
