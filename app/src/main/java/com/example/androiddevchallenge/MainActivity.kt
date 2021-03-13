@@ -15,32 +15,96 @@
  */
 package com.example.androiddevchallenge
 
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
 import com.example.androiddevchallenge.ui.theme.MyTheme
+import com.example.androiddevchallenge.ui.utils.Screen
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Make window status bar transparent
+        window.apply {
+            clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            statusBarColor = Color.TRANSPARENT
+        }
+
         setContent {
-            MyTheme {
-                MyApp()
+            val isDarkTheme by remember { mutableStateOf(false) }
+
+            MyTheme(isDarkTheme) {
+                Login(isDarkTheme = isDarkTheme)
             }
         }
     }
 }
 
+enum class LoginState {
+    INITIAL,
+    IN_PROCESS,
+    COMPLETED
+}
+
+@Composable
+fun Login(
+    isDarkTheme: Boolean
+) {
+    var loginState by remember { mutableStateOf(LoginState.INITIAL) }
+
+    when (loginState) {
+        LoginState.INITIAL -> InitialScreen(
+            onClick = { loginState = it },
+            isDarkTheme = isDarkTheme
+        )
+        LoginState.IN_PROCESS -> LoginScreen(
+            onClick = { loginState = it }
+        )
+        LoginState.COMPLETED -> MyApp()
+    }
+}
+
+
 // Start building your app here!
 @Composable
-fun MyApp() {
-    Surface(color = MaterialTheme.colors.background) {
-        Text(text = "Ready... Set... GO!")
+fun MyApp(modifier: Modifier = Modifier) {
+    val navController = rememberNavController()
+
+    val viewModel: MainViewModel = viewModel()
+
+    NavHost(navController = navController, startDestination = Screen.Home.name) {
+        composable(Screen.Home.name) {
+            Home(
+                modifier = modifier,
+                navigateTo = {
+                    navController.navigate(it.name) {
+                        // Pop up to the start destination of the graph to
+                        // avoid building up a large stack of destinations
+                        // on the back stack as users select items
+                        popUpTo = navController.graph.startDestination
+                        // Avoid multiple copies of the same destination when
+                        // reselecting the same item
+                        launchSingleTop = true
+                    }
+                },
+                viewModel = viewModel
+            )
+        }
     }
 }
 

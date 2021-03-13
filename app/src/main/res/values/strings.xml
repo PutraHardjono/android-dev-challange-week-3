@@ -10,4 +10,25 @@
       the License.
       -->
     <string name="app_name">AndroidDevChallenge</string>
+
+    <string name="home">Home</string>
+    <string name="favorite">Favorites</string>
+    <string name="profile">Profile</string>
+    <string name="cart">Cart</string>
+    <string name="login">Login</string>
+
+    <string name="title_motivation">Beautiful home garden solutions</string>
+    <string name="create_account">Create account</string>
+    <string name="login_text">Log in</string>
+
+    <string name="login_screen_title">Log in with email</string>
+    <string name="hint_email_address">Email address</string>
+    <string name="hint_password">Password (8+ characters)</string>
+    <string name="login_term">By clicking below, you agree to our Term of Use and consent to our Privacy Policy</string>
+
+    <string name="search">Search</string>
+    <string name="browse_theme">Browse themes</string>
+    <string name="list_title">Design your home garden</string>
+
+    <string name="content_description_filter_list">Filter list</string>
 </resources>

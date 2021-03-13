@@ -13,11 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.ui.theme
+package com.example.androiddevchallenge
 
-import androidx.compose.ui.graphics.Color
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
 
-val purple200 = Color(0xFFBB86FC)
-val purple500 = Color(0xFF6200EE)
-val purple700 = Color(0xFF3700B3)
-val teal200 = Color(0xFF03DAC5)
+@Composable
+fun FavoritesScreen() {
+    Text(text = "Favorites Screen")
+}
+
+@Composable
+fun ProfileScreen() {
+    Text(text = "Profile Screen")
+}
+
+@Composable
+fun CartScreen() {
+    Text(text = "Cart Screen")
+}
